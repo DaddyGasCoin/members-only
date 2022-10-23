@@ -10,6 +10,7 @@
     <h1>WELCOME BACK <%= user.username %>
     </h1>
     <a href="/log-out">LOG OUT</a>
+    <a href="/message-create">CREATE MESSAGE</a>
     <% } else { %>
       <h1>please log in</h1>
       <form action="/log-in" method="POST">

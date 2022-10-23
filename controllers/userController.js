@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 
 // Display user create form on GET.
 exports.user_create_get = (req, res) => {
-    res.render("sign-up-form")
+    res.render("sign-up-form", { user: req.user })
 };
 
 // Handle user create on POST.

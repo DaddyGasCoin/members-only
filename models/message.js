@@ -7,8 +7,7 @@ const MessageSchema = new Schema({
     title: { type: String, required: true, maxLength: 100 },
     date: { type: Date, required: true },
     data: { type: String, required: true },
-    membershipstatus: { type: Boolean, default: false },
-    user: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 // Export model
