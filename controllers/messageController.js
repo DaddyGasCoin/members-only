@@ -3,9 +3,17 @@ const { body, validationResult } = require("express-validator");
 
 // Display list of all messages.
 exports.message_list = (req, res) => {
-    res.send("NOT IMPLEMENTED: message list");
+    // res.send("NOT IMPLEMENTED: message list");
+    Message.find({})
+        .populate('user')
+        .exec(function (err, messages) {
+            if (err) {
+                return next(err);
+            }
+            //Successful, so render
+            res.render("index", { user: req.user, messages: messages });
+        });
 };
-
 
 // Display message create form on GET.
 exports.message_create_get = (req, res) => {

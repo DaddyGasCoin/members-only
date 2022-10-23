@@ -21,6 +21,40 @@
         <button>Log In</button>
       </form>
       <%}%>
+        <% if (messages) { %>
+          <ul>
+            <% messages.forEach(function(message) { %>
+              <li>
+                <div>
+                  <div>
+                    TITLE: <%= message.title %>
+                  </div>
+                  <div>
+                    MESSAGE: <%= message.data %>
+                  </div>
+                  <div>
+                    <% if (user) { %>
+                      <div>
+                        USERNAME: <%= message.user.username %>
+                      </div>
+                      <%} else { %>
+                        <div> USERNAME: anonymous</div>
+                        <% } %>
+                  </div>
+                  <div>
+                    <% if (user) { %>
+                      <div>
+                        DATE: <%= message.date %>
+                      </div>
+                      <%} else { %>
+                        <div> DATE: anonymous</div>
+                        <% } %>
+                  </div>
+                </div>
+              </li>
+              <% }); %>
+          </ul>
+          <% } %>
 </body>
 
 </html>

@@ -3,11 +3,9 @@ var router = express.Router({ mergeParams: true });
 
 const user_controller = require('../controllers/userController')
 const message_controller = require('../controllers/messageController')
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { user: req.user });
-});
 
+/* GET home page. */
+router.get('/', message_controller.message_list)
 // GET request for creating a user
 router.get('/sign-up', user_controller.user_create_get)
 
