@@ -68,11 +68,12 @@ exports.user_logout = (req, res) => {
     });
 }
 
-//Diplay Member staus from on POST
+//Diplay Member staus from on GET
 exports.user_member_add_get = (req, res) => {
     res.render('member_form', { user: req.user })
 }
 
+//Member status form on POST
 exports.user_member_add_post = [
     body("key", "Key is required").trim().isLength({ min: 1 }).escape(),
     body("key", "Incorrect key").trim().escape().equals('secret'),
@@ -93,6 +94,44 @@ exports.user_member_add_post = [
             //UPDATE MEMBERSHIP STATUS
             User.findByIdAndUpdate(req.user._id,
                 { membershipstatus: !req.user.membershipstatus },
+                {},
+                function (err) {
+                    if (err) {
+                        return next(err);
+                    }
+                    // Successful - redirect to home page
+                    res.redirect('/');
+                })
+        }
+    },
+]
+
+//Diplay admin staus from on GET
+exports.user_admin_add_get = (req, res) => {
+    res.render('admin_form', { user: req.user })
+}
+
+//Display admin status form on POST
+exports.user_admin_add_post = [
+    body("key", "Key is required").trim().isLength({ min: 1 }).escape(),
+    body("key", "Incorrect key").trim().escape().equals('secret'),
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values/error messages.
+            res.render("admin_form", {
+                user: req.user,
+                errors: errors.array(),
+            });
+            return;
+        } else {
+            // Data from form is valid.
+            //Update admin status
+            User.findByIdAndUpdate(req.user._id,
+                { admin: !req.user.admin },
                 {},
                 function (err) {
                     if (err) {
