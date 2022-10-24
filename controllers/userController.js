@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 
 // Display user create form on GET.
 exports.user_create_get = (req, res) => {
-    res.render("sign-up-form", { user: req.user })
+    res.render("sign-up-form")
 };
 
 // Handle user create on POST.
@@ -67,3 +67,40 @@ exports.user_logout = (req, res) => {
         res.redirect("/");
     });
 }
+
+//Diplay Member staus from on POST
+exports.user_member_add_get = (req, res) => {
+    res.render('member_form', { user: req.user })
+}
+
+exports.user_member_add_post = [
+    body("key", "Key is required").trim().isLength({ min: 1 }).escape(),
+    body("key", "Incorrect key").trim().escape().equals('secret'),
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values/error messages.
+            res.render("member_form", {
+                user: req.user,
+                errors: errors.array(),
+            });
+            return;
+        } else {
+            // Data from form is valid.
+            //UPDATE MEMBERSHIP STATUS
+            User.findByIdAndUpdate(req.user._id,
+                { membershipstatus: !req.user.membershipstatus },
+                {},
+                function (err) {
+                    if (err) {
+                        return next(err);
+                    }
+                    // Successful - redirect to home page
+                    res.redirect('/');
+                })
+        }
+    },
+]

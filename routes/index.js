@@ -21,6 +21,12 @@ router.get('/message-create', message_controller.message_create_get)
 //POST request to create message
 router.post('/message-create', message_controller.message_create_post)
 
+//GET request to change member status
+router.get('/member-status', user_controller.user_member_add_get)
+
+
+//POST request to change member status
+router.post('/member-status', user_controller.user_member_add_post)
 
 
 module.exports = router;
