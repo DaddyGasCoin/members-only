@@ -11,6 +11,7 @@ exports.message_list = (req, res) => {
                 return next(err);
             }
             //Successful, so render
+            console.log(req.user)
             res.render("index", { user: req.user, messages: messages });
         });
 };
