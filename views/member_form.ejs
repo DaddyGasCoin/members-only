@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 
 <body>
+    <div class="header-wrapper">
+        <div class="head-item">
+            <a class="home" href="/">MEMBERS MESSAGE BORAD</a>
+        </div>
+    </div>
     <% if (locals.errors) { %>
         <ul>
             <% errors.forEach(function(error) { %>
@@ -19,11 +25,16 @@
         </ul>
         <% } %>
             <% if (user) { %>
-                <form action="" method="POST">
-                    <label for="key">Enter key</label>
-                    <input name="key" type="text" required="true" />
-                    <button>Submit</button>
-                </form>
+                <div class="form-wrapper">
+                    <form action="" method="POST">
+                        <div class="row-wrap">
+                            <label for="key">Enter key</label>
+                            <input name="key" type="text" required="true" />
+                        </div>
+                        <button>Submit</button>
+                    </form>
+                </div>
+
                 <%} else { %>
                     <a href="/">LOGIN</a>
                     <% } %>

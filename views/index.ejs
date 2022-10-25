@@ -3,59 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
   <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %>
-    </h1>
-    <a href="/log-out">LOG OUT</a>
-    <a href="/message-create">CREATE MESSAGE</a>
-    <a href="/member-status">Change member status</a>
-    <a href="/admin-status">Change admin status</a>
+    <div class="header-wrapper">
+      <div class="head-item">
+        <a class="home" href="/">MEMBERS MESSAGE BORAD</a>
+      </div>
+      <div class="wrapper">
+        <div class="head-item flex">
+          <a href="/message-create">New Message</a>
+        </div>
+        <div class="dropdown">
+          <div class="dropbtn head-item flex">
+            <%= user.username %>
+          </div>
+          <div class="dropdown-content">
+            <a href="/member-status">Member Status</a>
+            <a href="/admin-status">Admin Status</a>
+          </div>
+        </div>
+        <div class="head-item flex">
+          <a href="/log-out">Logout</a>
+        </div>
+      </div>
+    </div>
     <% } else { %>
-      <h1>please log in</h1>
-      <form action="/log-in" method="POST">
-        <label for="username">Username</label>
-        <input name="username" placeholder="username" type="text" />
-        <label for="password">Password</label>
-        <input name="password" type="password" />
-        <button>Log In</button>
-      </form>
+      <div class="header-wrapper">
+        <div>
+          <div class="head-item">
+            <a class="home" href="/">MEMBERS MESSAGE BORAD</a>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="head-item flex">
+            <a href="/sign-up">Sign-up</a>
+          </div>
+          <div class="head-item flex">
+            <a href="/login">Login</a>
+          </div>
+        </div>
+      </div>
       <%}%>
         <% if (messages) { %>
-          <ul>
+          <div class="message-container">
             <% messages.forEach(function(message) { %>
-              <li>
-                <div>
-                  <div>
-                    TITLE: <%= message.title %>
-                  </div>
-                  <div>
-                    MESSAGE: <%= message.data %>
-                  </div>
-                  <div>
-                    <% if (user) { %>
-                      <div>
-                        USERNAME: <%= message.user.username %>
-                      </div>
-                      <%} else { %>
-                        <div> USERNAME: anonymous</div>
-                        <% } %>
-                  </div>
-                  <div>
-                    <% if (user) { %>
-                      <div>
-                        DATE: <%= message.date %>
-                      </div>
-                      <%} else { %>
-                        <div> DATE: anonymous</div>
-                        <% } %>
-                  </div>
+              <div class="message-wrapper">
+                <div class="title">
+                  <%= message.title %>
                 </div>
-              </li>
+                <div class="message">
+                  <%= message.data %>
+                </div>
+                <div>
+                  <% if (user && user.membershipstatus) { %>
+                    <div>
+                      User: <%= message.user.username %>
+                    </div>
+                    <%} else { %>
+                      <div> User: anonymous</div>
+                      <% } %>
+                </div>
+                <div>
+                  <% if (user && user.membershipstatus) { %>
+                    <div>
+                      Posted: <%= message.formatted_date %>
+                    </div>
+                    <%} else { %>
+                      <div> Posted: anonymous</div>
+                      <% } %>
+                </div>
+              </div>
               <% }); %>
-          </ul>
+          </div>
           <% } %>
 </body>
 

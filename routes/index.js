@@ -33,6 +33,8 @@ router.get('/admin-status', user_controller.user_admin_add_get)
 // POST request to change member status
 router.post('/admin-status', user_controller.user_admin_add_post)
 
+//GET request to change admin status
+router.get('/login', user_controller.user_login_get)
 
 
 module.exports = router;
