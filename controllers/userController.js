@@ -4,9 +4,15 @@ const { body, validationResult } = require("express-validator");
 
 
 // Display user create form on GET.
+exports.user_login_get = (req, res) => {
+    res.render("login-form")
+};
+
+// Display user create form on GET.
 exports.user_create_get = (req, res) => {
     res.render("sign-up-form")
 };
+
 
 // Handle user create on POST.
 exports.user_create_post = [
@@ -29,7 +35,6 @@ exports.user_create_post = [
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            console.log(errors.array())
             res.render("sign-up-form", {
                 errors: errors.array(),
             });

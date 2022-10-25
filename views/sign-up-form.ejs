@@ -3,11 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
     <title></title>
 </head>
 
 <body>
-    <h1>Sign Up</h1>
+    <div class="header-wrapper">
+        <div class="head-item">
+            <a class="home" href="/">MEMBERS MESSAGE BORAD</a>
+        </div>
+    </div>
     <% if (locals.errors) { %>
         <ul>
             <% errors.forEach(function(error) { %>
@@ -17,29 +22,32 @@
                 <% }); %>
         </ul>
         <% } %>
-            <form action="" method="POST">
-                <div>
-                    <label for="firstname">First Name</label>
-                    <input name="firstname" type="text" />
-                </div>
-                <div>
-                    <label for="lastname">Last Name</label>
-                    <input name="lastname" type="text" />
-                </div>
-                <div>
-                    <label for="username">Username</label>
-                    <input name="username" type="text" />
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input name="password" type="password" />
-                </div>
-                <div>
-                    <label for="cofirmpassword">Password</label>
-                    <input name="confirmpassword" type="password" />
-                </div>
-                <button>Sign Up</button>
-            </form>
+            <div class="form-wrapper">
+                <form class="sign-up" action="" method="POST">
+                    <div class="row-wrap">
+                        <label for="firstname">First Name</label>
+                        <input name="firstname" type="text" required="true" />
+                    </div>
+                    <div class="row-wrap">
+                        <label for="lastname">Last Name</label>
+                        <input name="lastname" type="text" />
+                    </div>
+                    <div class="row-wrap">
+                        <label for="username">Username</label>
+                        <input name="username" type="text" required="true" />
+                    </div>
+                    <div class="row-wrap">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" required="true" />
+                    </div>
+                    <div class="row-wrap">
+                        <label for="cofirmpassword">Confrim Password</label>
+                        <input name="confirmpassword" type="password" required="true" />
+                    </div>
+                    <button>Sign Up</button>
+                </form>
+            </div>
+
 </body>
 
 </html>
