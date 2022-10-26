@@ -36,5 +36,9 @@ router.post('/admin-status', user_controller.user_admin_add_post)
 //GET request to change admin status
 router.get('/login', user_controller.user_login_get)
 
+// GET request to delete champion.
+router.get("/message/delete/:id", message_controller.message_delete_get);
 
+// POST request to delete champion
+router.post("/message/delete/:id", message_controller.message_delete_post)
 module.exports = router;

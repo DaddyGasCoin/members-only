@@ -57,3 +57,34 @@ exports.message_create_post = [
     },
 ]
 
+// Display message create form on GET.
+exports.message_delete_get = (req, res, next) => {
+    Message.findById(req.params.id)
+        .exec(function (err, message) {
+            if (err) {
+                return next(err)
+            }
+            if (message == null) {
+                // No results.
+                res.redirect("/");
+            }
+            res.render("delete_form", { message: message })
+        })
+};
+
+
+// Display message create form on GET.
+exports.message_delete_post = (req, res) => {
+    Message.findById(req.params.id)
+        .exec(function (err, message) {
+            if (err) {
+                return next(err)
+            }
+            Message.findByIdAndRemove(req.params.id, (err) => {
+                if (err) {
+                    return next(err)
+                }
+                res.redirect('/')
+            })
+        })
+};

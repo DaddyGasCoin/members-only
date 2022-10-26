@@ -14,5 +14,10 @@ const MessageSchema = new Schema({
 MessageSchema.virtual("formatted_date").get(function () {
     return this.date.toJSON().slice(0, 10).replace(/-/g, '/')
 });
+
+// Virtual for user's full name
+MessageSchema.virtual("del_url").get(function () {
+    return `message/delete/${this._id}`;
+});
 // Export model
 module.exports = mongoose.model("Message", MessageSchema);

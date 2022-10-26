@@ -169,3 +169,32 @@ button {
 button:hover {
   background-color: #22c55e;
 }
+
+.row-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+  text-align: center;
+  color: initial;
+}
+
+.del-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 30%);
+
+}
+
+.del-form-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

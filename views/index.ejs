@@ -51,8 +51,13 @@
           <div class="message-container">
             <% messages.forEach(function(message) { %>
               <div class="message-wrapper">
-                <div class="title">
-                  <%= message.title %>
+                <div class="row-container">
+                  <div class="title">
+                    <%= message.title %>
+                  </div>
+                  <% if (user && user.admin) { %>
+                    <a href=<%=message.del_url %> class="button">X</a>
+                    <% } %>
                 </div>
                 <div class="message">
                   <%= message.data %>
